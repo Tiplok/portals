@@ -15,7 +15,7 @@ app.controller('PortalController', ['$http',
       }
     ];
     var self = this;
-    $http.get('portals/portals.json').then(
+    $http.get('http://localhost:3000/portals').then(
       function success(response){
         console.log('API call OK');
         self.portals = response.data;
