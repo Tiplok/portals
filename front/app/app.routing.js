@@ -1,9 +1,9 @@
 'use strict';
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
-  
+
   $urlRouterProvider.otherwise('/home');
-  
+
   $stateProvider
     .state('root', {
         url: '/',
@@ -15,7 +15,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         controller: 'PortalController',
         data: {
             css: [
-                'assets/css/home.css'
+                'assets/styles/css/home.css'
             ]
         }
     })
