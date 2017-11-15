@@ -12,7 +12,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     .state('home', {
         url: '/home',
         templateUrl: 'app/components/portal/portal.view.html',
-        controller: 'PortalController',
+        controller: 'PortalController as vm',
         data: {
             css: [
                 'assets/styles/css/home.css'
