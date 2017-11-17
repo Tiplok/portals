@@ -3,6 +3,9 @@
     <ul>
         <li ng-repeat="portal in vm.portals">
             <span>{{portal.name}}</span>
+            <span ng-click="vm.putPortals(portal)">U</span>
+            <span ng-click="vm.deletePortals(portal)">X</span>
         </li>
     </ul>
+    <span ng-click="vm.postPortals(portal)">Add a portal</span>
 </div>

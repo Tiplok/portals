@@ -40,7 +40,7 @@ db.connect(function(err){
 		console.error('error connecting: '+ err.stack);
 		return;
 	}
-	
+
 	console.log('connected as id '+ db.threadId);
 });
 
@@ -52,55 +52,67 @@ db.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 */
 
 // ---------- API Routing ----------
-app.route('/')
+var router = express.Router();
+
+router.route('/')
 	.get(function (req, res) {
 		res.send('Hello World!')
 	});
 
-app.route('/portals')
+router.route('/portals')
   .get(function(req, res) {
-	
+      console.log('get portals call');
+
 	// Todo: Check data (if id/user exists) then get data from db if all is ok
-	
-	res.json([{name:'test1'},{name:'test2'}]);
+
+	    res.json([{id: '1', name:'test1'},{id: '2', name:'test2'}]);
   })
   .post(function(req, res) {
-	console.log(req.query);
-	console.log(req.body);
-	console.log(req.body.test);
-	
+      console.log('post portals call');
+      console.log(req.query);
+      console.log(req.body);
+      console.log(req.body.test);
+
 	// Todo: Check data (mandatory / optional params given and if id/user exists and if format is ok) then insert into db if all is ok
-	
+
 	/*db.query('INSERT INTO () VALUES ()', function(err, rows, fields) {
 		if(err) throw err;
 	});*/
-    res.send('Add a portal');
+	    res.json({id: '3', name:'path'});
   })
+
+
+router.route('/portals/:portal_id')
   .put(function(req, res) {
-	  
-	// Todo: Check data (if id/user exists and if format is ok) then update db if all is ok
-	  
-    res.send('Update the portal');
+      console.log('put portals call');
+
+  // Todo: Check data (if id/user exists and if format is ok) then update db if all is ok
+
+      res.send({id: req.params.portal_id, name:'path2'});
   })
   .delete(function(req, res) {
-	  
-	// Todo: Check data (if id/user exists) then delete the resource in db
-	
-    res.send('Delete the portal');
+      console.log('delete portals call');
+
+  // Todo: Check data (if id/user exists) then delete the resource in db
+
+      res.send({id: '3', name:'path'});
   });
-  
+
+// ---------- Route registering ----------
+app.use('/api', router); // all of our routes will be prefixed with /api
+
 // ---------- 404 handler ----------
 app.use(function (req, res, next) {
   //res.status(404).send("Sorry can't find that!");
   res.status(404).sendFile(__dirname+"/static/404.html");
 });
-  
+
 // ---------- Error handler ----------
 app.use(function (err, req, res, next) {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 });
-  
+
 // ---------- Server start ----------
 var server = app.listen(port, function () {
   console.log('\n* Server listening on port : '+port+"\n");

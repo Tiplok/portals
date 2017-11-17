@@ -1,5 +1,8 @@
 Portals project
 
+Useful links :
+https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
+
 # Files organization
 
 ## Back - This folder contains all files relative to server-side
